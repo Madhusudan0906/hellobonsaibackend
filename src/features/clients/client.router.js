@@ -5,8 +5,40 @@ const app = express.Router();
 
 
 app.get("/",authMiddleware, async (req,res)=>{
+    try{
+        let client = await Clients.find({userId:req.userId});
+    res.send(client);
+    }catch(e){
+        res.status(500).send(e);
+    }
     
-    res.send("client GET Method");
+});
+
+app.post("/",authMiddleware,async(req,res)=>{
+    try{
+        let client = await Clients.create({...req.body,userId:req.userId});
+        res.send(client);
+    }catch(e){
+        res.status(500).send(e);
+    }
+})
+app.patch("/:id",authMiddleware,async(req,res)=>{
+    try{
+        let id = req.params;
+        let client = await Clients.findByIdAndUpdate({id},{$set:{...req.body}})
+        res.send(client);
+    }catch(e){
+        res.status(500).send(e);
+    }
 })
 
+app.delete("/:id",authMiddleware,async(req,res)=>{
+    try{
+        let id = req.params;
+        let client = await Clients.findByIdAndDelete(id);
+        res.send(client);
+    }catch(e){
+        res.status(500).send(e);
+    }
+})
 module.exports = app;
