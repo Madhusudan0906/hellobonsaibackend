@@ -3,7 +3,7 @@
 
 - #### user -get - https://hellobonsaibackend.herokuapp.com/users
 - #### user/id -get - https://hellobonsaibackend.herokuapp.com/users/:id -- authentication required
-- #### login -post - https://hellobonsaibackend.herokuapp.com/users/login
+- #### login -post - https://hellobonsaibackend.herokuapp.com/users/login -- authentication required
 - #### signUp -post - https://hellobonsaibackend.herokuapp.com/users/signUp
 - #### logout -post - https://hellobonsaibackend.herokuapp.com/logout
 - #### client -get - https://hellobonsaibackend.herokuapp.com/clients  -- authentication required
