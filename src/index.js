@@ -14,7 +14,7 @@ app.use("/clients",clients);
 app.use("/projects",projects);
 
 app.use("/",(req,res)=>{
-    res.send("hello world!");
+    res.json({"message":"hello world!"});
 })
 
 
