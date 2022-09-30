@@ -13,7 +13,7 @@ app.use("/users",users);
 app.use("/clients",clients);
 app.use("/projects",projects);
 
-app.use("/",(req,res)=>{
+app.use("/",function(req,res){
     res.json({"message":"hello world!"});
 })
 
