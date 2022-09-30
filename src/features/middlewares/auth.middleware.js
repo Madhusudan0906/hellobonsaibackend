@@ -11,7 +11,7 @@ const authMiddleware = async (req, res, next) => {
       // console.log("email",email);
       // console.log(id);
       let user = await users.findById(id);
-      console.log(user);
+      // console.log(user);
       if (user.email == email) {
         req.userId = id;
         next();

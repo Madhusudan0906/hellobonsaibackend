@@ -18,7 +18,7 @@ app.use("/",(req,res)=>{
 })
 
 
-app.listen(PORT,()=>{
-    dbConnect();
+app.listen(PORT,async ()=>{
+    await dbConnect();
     console.log(`server listening at PORT : ${PORT}`);
 })
