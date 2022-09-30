@@ -1,18 +1,10 @@
 {
     "version": 2,
+    "name": "nodejs-express",
     "builds": [
-      {
-        "src": "./src/index.js",
-        "use": "@vercel/node"
-      }
+        { "src": "/src/index.js", "use": "@now/node" }
     ],
     "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/src/index.js"
-      }
-    ],
-    "rewrites":  [
-      {"source": "/(.*)", "destination": "/"}
+        { "src": "/src/(.*)", "dest": "/src/index.js" }
     ]
-  }
+}
