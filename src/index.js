@@ -5,8 +5,9 @@ const cookieParser = require('cookie-parser');
 const users = require("./features/users/users.router");
 const clients = require("./features/clients/client.router");
 const projects = require("./features/projects/projects.router");
-
+const cors = require('cors');
 const app = express();
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use("/users",users);
