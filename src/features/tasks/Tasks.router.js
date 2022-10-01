@@ -48,7 +48,7 @@ app.patch( "/:id",  async ( req, res ) => {
 app.delete( "/:id",  async ( req, res ) => {
     try {
         let id = req.params.id;
-        let task = await Tasks.findByIdAndDelete( { id } );
+        let task = await Tasks.findByIdAndDelete( id );
         res.send( task );
     } catch ( e ) {
         res.status( 500 ).send( e );
