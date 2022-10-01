@@ -4,15 +4,10 @@ const Clients = require("./clients.model");
 const app = express.Router();
 
 
-app.get("/", async (req,res)=>{
+app.post("/", async (req,res)=>{
     try{
-        let token = req.headers.cookie;
-        let a = token.split("=");
-      let tokena= a[1].split("%3A");
-      let id = tokena[0];
-      let email = tokena[1].split("%40");
-      email = email.join("@");
-        let client = await Clients.find({userId:id});
+        
+        let client = await Clients.find({userId:req.body.userId});
     res.send(client);
     }catch(e){
         res.status(500).send(e);
@@ -21,12 +16,6 @@ app.get("/", async (req,res)=>{
 });
 app.get("/:id", async (req,res)=>{
     try{
-    //     let token = req.headers.cookie;
-    //     let a = token.split("=");
-    //   let tokena= a[1].split("%3A");
-    //   let id = tokena[0];
-    //   let email = tokena[1].split("%40");
-    //   email = email.join("@");
         let id = req.params;
         let client = await Clients.findById(id);
     res.send(client);
@@ -38,13 +27,8 @@ app.get("/:id", async (req,res)=>{
 
 app.post("/",async(req,res)=>{
     try{
-        let token = req.headers.cookie;
-        let a = token.split("=");
-      let tokena= a[1].split("%3A");
-      let id = tokena[0];
-      let email = tokena[1].split("%40");
-      email = email.join("@");
-        let client = await Clients.create({...req.body,userId:id});
+        
+        let client = await Clients.create({...req.body});
         res.send(client);
     }catch(e){
         res.status(500).send(e);

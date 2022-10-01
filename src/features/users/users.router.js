@@ -13,16 +13,11 @@ app.get("/", async (req,res)=>{
 })
 app.get("/:id", async (req,res)=>{
     try{
-        let token = req.headers.cookie;
-        let a = token.split("=");
-      let tokena= a[1].split("%3A");
-      let id = tokena[0];
-      let email = tokena[1].split("%40");
-      email = email.join("@");
+        let id = req.params;
         
     let user = await users.findById(id);
     // console.log(user);
-    let company = await companys.find({userId:id});
+    let company = await companys.find({userId:user.id});
     // console.log(company);
     let item={user:user,company:company};
     res.send(item);
