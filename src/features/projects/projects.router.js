@@ -5,7 +5,7 @@ const Projects = require("./projects.model");
 const app = express.Router();
 
 
-app.get("/",authMiddleware,async (req,res)=>{
+app.get("/",async (req,res)=>{
     try{
         let project = await Projects.find();
         res.send(project);
@@ -14,7 +14,7 @@ app.get("/",authMiddleware,async (req,res)=>{
     }
     
 });
-app.post("/",authMiddleware,async (req,res)=>{
+app.post("/",async (req,res)=>{
     try{
         let project = await Projects.create({...req.body});
         res.send(project);
@@ -22,7 +22,7 @@ app.post("/",authMiddleware,async (req,res)=>{
         res.status(500).send(e);
     }
 })
-app.patch("/:id",authMiddleware,async (req,res)=>{
+app.patch("/:id",async (req,res)=>{
     try{
         let id = req.params;
         let project = await Projects.findByIdAndUpdate({id},{...req.body});
@@ -31,7 +31,7 @@ app.patch("/:id",authMiddleware,async (req,res)=>{
         res.status(500).send(e);
     }
 });
-app.delete("/:id",authMiddleware,async (req,res)=>{
+app.delete("/:id",async (req,res)=>{
     try{
         let id = req.params;
         let project = await Projects.findByIdAndDelete({id});

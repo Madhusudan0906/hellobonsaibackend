@@ -11,14 +11,22 @@ app.get("/", async (req,res)=>{
     let user = await users.find();
     res.send(user);
 })
-app.get("/:id",authMiddleware, async (req,res)=>{
+app.get("/:id", async (req,res)=>{
     try{
-    let user = await users.findById(req.userId);
+        let token = req.headers.cookie;
+        let a = token.split("=");
+      let tokena= a[1].split("%3A");
+      let id = tokena[0];
+      let email = tokena[1].split("%40");
+      email = email.join("@");
+        
+    let user = await users.findById(id);
     // console.log(user);
-    let company = await companys.find({userId:req.userId});
+    let company = await companys.find({userId:id});
     // console.log(company);
     let item={user:user,company:company};
     res.send(item);
+    // res.send(d);
     }catch(e){
         res.status(500).send(e);
     }
@@ -66,26 +74,31 @@ app.post("/login",async (req,res)=>{
         res.status(500).send(e.message);
     }
 })
-app.post("/company",authMiddleware,async (req,res)=>{
-    console.log(req.userId);
+app.post("/company",async (req,res)=>{
+    let token = req.headers.cookie;
+        let a = token.split("=");
+      let tokena= a[1].split("%3A");
+      let id = tokena[0];
+      let email = tokena[1].split("%40");
+      email = email.join("@");
     try{
-        let company = await companys.find({userId:req.userId});
+        let company = await companys.find({userId:id});
         console.log(company);
         if(company){
             let {name,contact,address} = req.body;
             if(name){
-               await companys.updateOne({userId:req.userId},{$set:{name:name}});
+               await companys.updateOne({userId:id},{$set:{name:name}});
             }
             if(contact){
-               await companys.updateOne({userId:req.userId},{$set:{contact:contact}});
+               await companys.updateOne({userId:id},{$set:{contact:contact}});
             }
             if(address){
-               await companys.updateOne({userId:req.userId},{$set:{address:address}});
+               await companys.updateOne({userId:id},{$set:{address:address}});
             }
             res.send("update successfully");
         }else{
             
-               item= await companys.create({userId:req.userId,...req.body});
+               item= await companys.create({userId:id,...req.body});
             
             res.send(item);
         }

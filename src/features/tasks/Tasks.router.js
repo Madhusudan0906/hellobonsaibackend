@@ -5,7 +5,7 @@ const Tasks = require( "./Tasks.model" );
 const app = express.Router();
 
 
-app.get( "/", authMiddleware, async ( req, res ) => {
+app.get( "/", async ( req, res ) => {
     try {
         let task = await Tasks.find();
         res.send( task );
@@ -14,7 +14,7 @@ app.get( "/", authMiddleware, async ( req, res ) => {
     }
 
 } );
-app.post( "/", authMiddleware, async ( req, res ) => {
+app.post( "/", async ( req, res ) => {
     try {
         let task = await Tasks.create( { ...req.body } );
         res.send( task );
@@ -22,7 +22,7 @@ app.post( "/", authMiddleware, async ( req, res ) => {
         res.status( 500 ).send( e );
     }
 } )
-app.patch( "/:id", authMiddleware, async ( req, res ) => {
+app.patch( "/:id",  async ( req, res ) => {
     try {
         let id = req.params;
         let task = await Tasks.findByIdAndUpdate( { id }, { ...req.body } );
@@ -31,7 +31,7 @@ app.patch( "/:id", authMiddleware, async ( req, res ) => {
         res.status( 500 ).send( e );
     }
 } );
-app.delete( "/:id", authMiddleware, async ( req, res ) => {
+app.delete( "/:id",  async ( req, res ) => {
     try {
         let id = req.params;
         let task = await Tasks.findByIdAndDelete( { id } );
