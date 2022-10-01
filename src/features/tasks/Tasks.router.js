@@ -24,9 +24,12 @@ app.post( "/", async ( req, res ) => {
 } )
 app.patch( "/:id",  async ( req, res ) => {
     try {
-        let id = req.params;
-        let task = await Tasks.findByIdAndUpdate( { id }, { ...req.body } );
+        let id = req.params.id;
+        console.log(id);
+        let task = await Tasks.findByIdAndUpdate( { _id:id }, { ...req.body } );
+        console.log(task);
         res.send( task );
+        // res.send(id)
     } catch ( e ) {
         res.status( 500 ).send( e );
     }
