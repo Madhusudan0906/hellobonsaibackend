@@ -1,6 +1,6 @@
 const users = require("../users/users.model");
 const authMiddleware = async (req, res, next) => {
-    let token=req.headers.cookie;
+    let token=req.headers.cookie||req.headers.token;
     
     if (token) {
       let a = token.split("=");

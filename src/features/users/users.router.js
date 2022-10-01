@@ -57,9 +57,7 @@ app.post("/login",async (req,res)=>{
         res.cookie("token",`${user.id}:${user.email}`,{
             expires: new Date(Date.now() + (30 * 60000)) , httpOnly: true
         });
-        let a = req.cookies;
         
-        console.log(a.token);
         res.send({
             token:`${user.id}:${user.email}`
         });
