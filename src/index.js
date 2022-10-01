@@ -8,7 +8,9 @@ const projects = require( "./features/projects/projects.router" );
 const cors = require( 'cors' );
 const tasks = require( './features/tasks/Tasks.router' );
 const app = express();
-app.use( cors() );
+app.use( cors({
+    origin: '*'
+}) );
 app.use( cookieParser() );
 app.use( express.json() );
 app.use( "/users", users );
