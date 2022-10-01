@@ -14,6 +14,16 @@ app.get("/",async (req,res)=>{
     }
     
 });
+app.get("/:id",async (req,res)=>{
+    try{
+        let id = req.params.id;
+        let project = await Projects.findById(id);
+        res.send(project);
+    }catch(e){
+        res.status(500).send(e);
+    }
+    
+});
 app.post("/",async (req,res)=>{
     try{
         let project = await Projects.create({...req.body});
@@ -24,8 +34,8 @@ app.post("/",async (req,res)=>{
 })
 app.patch("/:id",async (req,res)=>{
     try{
-        let id = req.params;
-        let project = await Projects.findByIdAndUpdate({id},{...req.body});
+        let id = req.params.id;
+        let project = await Projects.findByIdAndUpdate({_id:id},{...req.body});
         res.send(project);
     }catch(e){
         res.status(500).send(e);
@@ -33,8 +43,8 @@ app.patch("/:id",async (req,res)=>{
 });
 app.delete("/:id",async (req,res)=>{
     try{
-        let id = req.params;
-        let project = await Projects.findByIdAndDelete({id});
+        let id = req.params.id;
+        let project = await Projects.findByIdAndDelete(id);
         res.send(project);
     }catch(e){
         res.status(500).send(e);

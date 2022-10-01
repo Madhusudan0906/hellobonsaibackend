@@ -13,7 +13,7 @@ app.get("/", async (req,res)=>{
 })
 app.get("/:id", async (req,res)=>{
     try{
-        let id = req.params;
+        let id = req.params.id;
         
     let user = await users.findById(id);
     // console.log(user);

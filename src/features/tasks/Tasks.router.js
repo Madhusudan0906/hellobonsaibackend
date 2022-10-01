@@ -14,6 +14,17 @@ app.get( "/", async ( req, res ) => {
     }
 
 } );
+
+app.get( "/:id", async ( req, res ) => {
+    try {
+        let id =req.params.id;
+        let task = await Tasks.findById(id);
+        res.send( task );
+    } catch ( e ) {
+        res.status( 500 ).send( e );
+    }
+
+} );
 app.post( "/", async ( req, res ) => {
     try {
         let task = await Tasks.create( { ...req.body } );
@@ -25,9 +36,9 @@ app.post( "/", async ( req, res ) => {
 app.patch( "/:id",  async ( req, res ) => {
     try {
         let id = req.params.id;
-        console.log(id);
+        // console.log(id);
         let task = await Tasks.findByIdAndUpdate( { _id:id }, { ...req.body } );
-        console.log(task);
+        // console.log(task);
         res.send( task );
         // res.send(id)
     } catch ( e ) {
@@ -36,7 +47,7 @@ app.patch( "/:id",  async ( req, res ) => {
 } );
 app.delete( "/:id",  async ( req, res ) => {
     try {
-        let id = req.params;
+        let id = req.params.id;
         let task = await Tasks.findByIdAndDelete( { id } );
         res.send( task );
     } catch ( e ) {

@@ -15,7 +15,7 @@ app.get("/", async (req,res)=>{
 });
 app.get("/:id", async (req,res)=>{
     try{
-        let id = req.params;
+        let id = req.params.id;
         let client = await Clients.findById(id);
     res.send(client);
     }catch(e){
@@ -36,8 +36,8 @@ app.post("/",async(req,res)=>{
 app.patch("/:id",async(req,res)=>{
     try{
 
-        let id = req.params;
-        let client = await Clients.findByIdAndUpdate({id},{$set:{...req.body}})
+        let id = req.params.id;
+        let client = await Clients.findByIdAndUpdate({_id:id},{$set:{...req.body}})
         res.send(client);
     }catch(e){
         res.status(500).send(e);
@@ -46,7 +46,7 @@ app.patch("/:id",async(req,res)=>{
 
 app.delete("/:id",async(req,res)=>{
     try{
-        let id = req.params;
+        let id = req.params.id;
         let client = await Clients.findByIdAndDelete(id);
         res.send(client);
     }catch(e){
