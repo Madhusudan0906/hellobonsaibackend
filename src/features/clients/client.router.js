@@ -13,6 +13,16 @@ app.get("/",authMiddleware, async (req,res)=>{
     }
     
 });
+app.get("/:id",authMiddleware, async (req,res)=>{
+    try{
+        let id = req.params;
+        let client = await Clients.findById(id);
+    res.send(client);
+    }catch(e){
+        res.status(500).send(e);
+    }
+    
+});
 
 app.post("/",authMiddleware,async(req,res)=>{
     try{
