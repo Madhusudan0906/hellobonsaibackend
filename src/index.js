@@ -8,10 +8,7 @@ const projects = require( "./features/projects/projects.router" );
 const cors = require( 'cors' );
 const tasks = require( './features/tasks/Tasks.router' );
 const app = express();
-app.use( cors({
-    origin:"https://hellobonsaibackend.herokuapp.com",
-    credentials:true
-}) );
+app.use( cors() );
 app.use( cookieParser() );
 app.use( express.json() );
 app.use( "/users", users );
