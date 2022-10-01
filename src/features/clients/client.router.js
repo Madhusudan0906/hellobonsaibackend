@@ -4,10 +4,9 @@ const Clients = require("./clients.model");
 const app = express.Router();
 
 
-app.post("/", async (req,res)=>{
+app.get("/", async (req,res)=>{
     try{
-        
-        let client = await Clients.find({userId:req.body.userId});
+        let client = await Clients.find();
     res.send(client);
     }catch(e){
         res.status(500).send(e);
