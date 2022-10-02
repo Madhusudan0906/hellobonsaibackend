@@ -24,6 +24,16 @@ app.get("/:id",async (req,res)=>{
     }
     
 });
+app.get("/:id",async (req,res)=>{
+    try{
+        let id = req.params.id;
+        let project = await Projects.find({"userId": id});
+        res.send(project);
+    }catch(e){
+        res.status(500).send(e);
+    }
+    
+});
 app.post("/",async (req,res)=>{
     try{
         let project = await Projects.create({...req.body});
