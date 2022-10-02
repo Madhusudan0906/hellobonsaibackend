@@ -7,7 +7,9 @@ const tasksSchema = mongoose.Schema( {
     client: { type: String },
     duedate: { type: String },
     time: { type: String },
-    status: { type: String }
+    status: { type: String },
+    description:{type:String}
+
 
 } );
 
