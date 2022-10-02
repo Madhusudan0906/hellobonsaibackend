@@ -13,6 +13,16 @@ app.get("/", async (req,res)=>{
     }
     
 });
+app.get("/c/:id", async (req,res)=>{
+    try{
+        let id = req.params.id;
+        let client = await Clients.findById(id);
+    res.send(client);
+    }catch(e){
+        res.status(500).send(e);
+    }
+    
+});
 app.get("/:id", async (req,res)=>{
     try{
         let id = req.params.id;
