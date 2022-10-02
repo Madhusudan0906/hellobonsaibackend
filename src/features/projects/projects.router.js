@@ -24,7 +24,7 @@ app.get("/:id",async (req,res)=>{
     }
     
 });
-app.get("/:userId/:id",async (req,res)=>{
+app.get("/userId/:id",async (req,res)=>{
     try{
         let id = req.params.id;
         let project = await Projects.find({"userId" : id});
