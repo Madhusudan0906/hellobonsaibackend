@@ -24,10 +24,10 @@ app.get("/:id",async (req,res)=>{
     }
     
 });
-app.get("/:id",async (req,res)=>{
+app.get("/:userId/:id",async (req,res)=>{
     try{
         let id = req.params.id;
-        let project = await Projects.find(id);
+        let project = await Projects.find({"userId" : id});
         res.send(project);
     }catch(e){
         res.status(500).send(e);
