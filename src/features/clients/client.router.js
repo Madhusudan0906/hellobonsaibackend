@@ -16,7 +16,7 @@ app.get("/", async (req,res)=>{
 app.get("/:id", async (req,res)=>{
     try{
         let id = req.params.id;
-        let client = await Clients.findById(id);
+        let client = await Clients.find({userId:id});
     res.send(client);
     }catch(e){
         res.status(500).send(e);
