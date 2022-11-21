@@ -6,10 +6,10 @@ const app = express.Router();
 
 
 app.get( "/", async ( req, res ) => {
-    let { clientId } = req.body;
+
 
     try {
-        let task = await Tasks.find( { clientId: clientId } );
+        let task = await Tasks.find( { clientId: req.headers.clientId } );
         res.send( task );
     } catch ( e ) {
         res.status( 500 ).send( e );
