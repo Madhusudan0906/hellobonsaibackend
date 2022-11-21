@@ -6,8 +6,10 @@ const app = express.Router();
 
 
 app.get( "/", async ( req, res ) => {
+    let { clientId } = req.body;
+
     try {
-        let task = await Tasks.find();
+        let task = await Tasks.find( { clientId: clientId } );
         res.send( task );
     } catch ( e ) {
         res.status( 500 ).send( e );
@@ -17,8 +19,8 @@ app.get( "/", async ( req, res ) => {
 
 app.get( "/:id", async ( req, res ) => {
     try {
-        let id =req.params.id;
-        let task = await Tasks.findById(id);
+        let id = req.params.id;
+        let task = await Tasks.findById( id );
         res.send( task );
     } catch ( e ) {
         res.status( 500 ).send( e );
@@ -33,11 +35,11 @@ app.post( "/", async ( req, res ) => {
         res.status( 500 ).send( e );
     }
 } )
-app.patch( "/:id",  async ( req, res ) => {
+app.patch( "/:id", async ( req, res ) => {
     try {
         let id = req.params.id;
         // console.log(id);
-        let task = await Tasks.findByIdAndUpdate( { _id:id }, { ...req.body } );
+        let task = await Tasks.findByIdAndUpdate( { _id: id }, { ...req.body } );
         // console.log(task);
         res.send( task );
         // res.send(id)
@@ -45,7 +47,7 @@ app.patch( "/:id",  async ( req, res ) => {
         res.status( 500 ).send( e );
     }
 } );
-app.delete( "/:id",  async ( req, res ) => {
+app.delete( "/:id", async ( req, res ) => {
     try {
         let id = req.params.id;
         let task = await Tasks.findByIdAndDelete( id );
