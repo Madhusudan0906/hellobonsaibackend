@@ -9,7 +9,8 @@ app.get( "/", async ( req, res ) => {
 
 
     try {
-        let task = await Tasks.find( { clientId: req.headers.clientId } );
+        let task = await Tasks.find( { clientId: req.headers.clientid } );
+
         res.send( task );
     } catch ( e ) {
         res.status( 500 ).send( e );
