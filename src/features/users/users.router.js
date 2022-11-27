@@ -27,6 +27,15 @@ app.get("/:id", async (req,res)=>{
     }
     
 })
+app.delete("/:id",async (req,res)=>{
+    try{
+        let id = req.params.id;
+        let user = await users.findByIdAndDelete(id);
+        res.send(user);
+    }catch(e){
+        res.status(500).send(e);
+    }
+})
 app.patch("/:id",async (req,res)=>{
     try{
         let id = req.params.id;
