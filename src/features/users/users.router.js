@@ -27,6 +27,18 @@ app.get("/:id", async (req,res)=>{
     }
     
 })
+app.patch("/:id",async (req,res)=>{
+    try{
+        let id = req.params.id;
+        let user = await users.findOneAndUpdate({_id:id},{...req.body})
+
+        res.send(user);
+
+    }
+    catch(e){
+        res.status(500).send(e);
+    }
+})
 app.post("/signUp",async (req,res)=>{
     let {email} = req.body;
     try{
