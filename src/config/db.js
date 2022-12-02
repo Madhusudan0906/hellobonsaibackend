@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const uri = process.env.MongoURL;
 const connect = ()=>{
-    return mongoose.connect("mongodb+srv://mad:cloud@cluster0.zaobbmm.mongodb.net/hellobonsai");
+    return mongoose.connect(uri);
 }
 
 module.exports = connect
